@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mega Recharge Mahotsav | Free 3 Months</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Main Container */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            box-shadow: 0 0 25px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER DESIGN (Previous Style) --- */
+        .main-header {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 35px 20px 60px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            position: relative;
+        }
+
+        .limit-tag {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .main-header h1 { font-size: 26px; line-height: 1.2; margin-bottom: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .main-header h1 span { font-weight: 800; font-size: 34px; display: block; margin-top: 5px; }
+        .main-header p { font-size: 14px; opacity: 0.9; }
+
+        /* --- WINNER CARD (Floating) --- */
+        .winner-card {
+            background: white;
+            margin: -40px 20px 20px;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .trophy-icon {
+            background: #fff4e6;
+            color: #ff9f43;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            border: 2px solid #ffe082;
+        }
+
+        .winner-info h3 { font-size: 15px; color: #333; margin: 2px 0; font-weight: 700; }
+        .winner-info small { color: #888; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+        .success-text { color: #2ecc71; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+
+        /* --- SIM GRID --- */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .sim-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            height: 100px;
+        }
+        
+        .sim-card:hover, .sim-card.selected {
+            border-color: #ff4b2b;
+            background: #fff5f5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.15);
+        }
+
+        /* SVG Logo Styling within Cards */
+        .sim-logo-svg {
+            height: 40px;
+            width: auto;
+            margin-bottom: 8px;
+        }
+        
+        .sim-card span { font-size: 14px; font-weight: 600; color: #444; }
+
+        /* --- INPUTS --- */
+        .input-group { margin-bottom: 25px; }
+        .input-group label { font-size: 14px; color: #555; font-weight: 600; margin-bottom: 8px; display: block; }
+        
+        .input-wrapper {
+            display: flex; align-items: center;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            border-radius: 12px;
+            background: #f9f9f9;
+            transition: 0.3s;
+        }
+        .input-wrapper:focus-within { background: #fff; border-color: #ff4b2b; box-shadow: 0 0 0 3px rgba(255, 75, 43, 0.1); }
+        .input-wrapper img { width: 25px; margin-right: 10px; border-radius: 3px; }
+        .input-wrapper input {
+            border: none; background: transparent; width: 100%;
+            outline: none; font-size: 18px; font-weight: 600; color: #333;
+        }
+
+        /* --- BUTTONS --- */
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 75, 43, 0.3);
+            transition: transform 0.2s;
+        }
+        .cta-btn:active { transform: scale(0.98); }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 20px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            animation: wobble 2.5s infinite;
+        }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            background: #e0e0e0;
+            border-radius: 20px;
+            height: 20px;
+            width: 100%;
+            margin: 25px 0 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            height: 100%;
+            width: 0%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 10px; font-weight: bold;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #progressText { text-align: center; font-weight: 600; color: #444; font-size: 14px; }
+
+        /* --- CONGRATS PAGE --- */
+        .congrats-box { text-align: center; padding: 40px 20px; }
+        .confetti-icon { font-size: 60px; margin-bottom: 15px; animation: bounce 2s infinite; }
+        
+        .success-details {
+            background: #f0fff4;
+            border: 1px solid #c6f6d5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-row span:first-child { color: #666; }
+        .detail-row span:last-child { font-weight: 700; color: #333; }
+
+        /* --- ADS --- */
+        .ad-banner {
+            background: #f8f9fa;
+            color: #adb5bd;
+            text-align: center;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px dashed #dee2e6;
+            font-size: 12px;
+        }
+
+        /* --- UTILS & ANIMATION --- */
+        .step-section { padding: 10px 20px 30px; }
+        .hidden { display: none; }
+        .section-title { margin-bottom: 15px; color: #444; font-weight: 700; font-size: 16px; }
+
+        .pulse-anim { animation: pulse 1.5s infinite; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(255,75,43,0.5); } 100% { transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-20px);} 60% {transform: translateY(-10px);} }
+        @keyframes wobble { 0% { transform: translateX(0%); } 15% { transform: translateX(-5px) rotate(-5deg); } 30% { transform: translateX(3px) rotate(3deg); } 45% { transform: translateX(-3px) rotate(-3deg); } 60% { transform: translateX(2px) rotate(2deg); } 75% { transform: translateX(-1px) rotate(-1deg); } 100% { transform: translateX(0%); } }
+
+        footer { text-align: center; font-size: 10px; color: #999; padding: 20px; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="main-header">
+            <div class="limit-tag">LIMITED TIME OFFER</div>
+            <h1>3 MONTHS <br><span>FREE RECHARGE</span></h1>
+            <p>India's Biggest Digital Festival</p>
+        </header>
+
+        <!-- WINNER MARQUEE -->
+        <div class="winner-card fade-in-up">
+            <div class="trophy-icon"><i class="fas fa-trophy"></i></div>
+            <div class="winner-info">
+                <small>LAST WEEK'S WINNER</small>
+                <h3>Jitendra Sahu (जितेन्द्र साहू)</h3>
+                <span class="success-text"><i class="fas fa-check-circle"></i> Pack Activated: 3 Months Unlimited</span>
+            </div>
+        </div>
+
+        <!-- ADS PLACEHOLDER -->
+        <div style="padding: 0 20px;">
+            <div class="ad-banner">
+                <p>ADSTERRA / NATIVE AD HERE</p>
+            </div>
+        </div>
+
+        <!-- SECTION 1: FORM -->
+        <div id="step-1" class="step-section fade-in-up">
+            <h4 class="section-title">Select Your SIM Operator</h4>
+            
+            <div class="sim-grid">
+                <!-- JIO ICON (SVG) -->
+                <div class="sim-card" onclick="selectSim(this, 'Jio')">
+                    <svg class="sim-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="50" fill="#0f3e99"/>
+                        <text x="50" y="65" font-family="Arial" font-weight="bold" font-size="40" fill="white" text-anchor="middle">Jio</text>
+                    </svg>
+                    <span>Jio</span>
+                </div>
+
+                <!-- AIRTEL ICON (SVG) -->
+                <div class="sim-card" onclick="selectSim(this, 'Airtel')">
+                    <svg class="sim-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="10" fill="#ec1c24"/>
+                        <text x="50" y="70" font-family="Arial" font-weight="bold" font-size="60" fill="white" text-anchor="middle">a</text>
+                    </svg>
+                    <span>Airtel</span>
+                </div>
+
+                <!-- VI ICON (SVG) -->
+                <div class="sim-card" onclick="selectSim(this, 'Vi')">
+                    <svg class="sim-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0L100 100" stroke="#f00" stroke-width="0"/>
+                        <polygon points="10,10 90,10 50,90" fill="#ffc700"/>
+                        <text x="50" y="45" font-family="Arial" font-weight="bold" font-size="35" fill="#e40000" text-anchor="middle">Vi</text>
+                        <text x="50" y="65" font-family="Arial" font-size="10" fill="#e40000" text-anchor="middle">Together</text>
+                    </svg>
+                    <span>Vi™</span>
+                </div>
+
+                <!-- BSNL ICON (SVG) -->
+                <div class="sim-card" onclick="selectSim(this, 'BSNL')">
+                    <svg class="sim-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                         <rect width="100" height="100" rx="10" fill="white" stroke="#005b9f" stroke-width="5"/>
+                         <text x="50" y="60" font-family="Arial" font-weight="bold" font-size="28" fill="#005b9f" text-anchor="middle">BSNL</text>
+                         <path d="M20 70 L80 70" stroke="#f26522" stroke-width="5"/>
+                         <path d="M20 25 L80 25" stroke="#009347" stroke-width="5"/>
+                    </svg>
+                    <span>BSNL</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <div class="input-wrapper">
+                    <img src="https://flagcdn.com/w40/in.png" alt="India">
+                    <input type="tel" id="mobileNumber" placeholder="Enter 10-digit Number" maxlength="10">
+                </div>
+            </div>
+
+            <button class="cta-btn pulse-anim" onclick="checkEligibility()">Check Eligibility <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <!-- SECTION 2: VERIFICATION -->
+        <div id="step-2" class="step-section hidden">
+            <h2 style="color: #ff416c; text-align: center; margin-bottom: 10px;">Verification Required</h2>
+            <p style="text-align: center; color: #666; font-size: 14px;">To activate <b><span id="selectedOpText"></span></b> Plan, share this offer with 5-10 friends or groups on WhatsApp.</p>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <p id="progressText">0% Completed</p>
+
+            <button class="whatsapp-btn" onclick="shareOnWhatsapp()">
+                <i class="fab fa-whatsapp" style="font-size: 22px;"></i> Share on WhatsApp
+            </button>
+
+            <!-- NATIVE AD -->
+            <div class="ad-banner">
+                <p>NATIVE AD UNIT</p>
+            </div>
+
+            <div style="background: #fffbe6; border-left: 4px solid #ffc107; padding: 10px; font-size: 12px; color: #856404; margin-top: 10px;">
+                <b>Note:</b> You must share with active friends. System detects activity.
+            </div>
+        </div>
+
+        <!-- SECTION 3: CONGRATULATIONS -->
+        <div id="step-3" class="step-section hidden">
+            <div class="congrats-box">
+                <div class="confetti-icon">🎉</div>
+                <h2 style="margin-bottom: 10px; color: #333;">Congratulations!</h2>
+                <p style="color: #666; margin-bottom: 20px;">Your name has been added to the winner's list.</p>
+                
+                <div class="success-details">
+                    <div class="detail-row">
+                        <span>Number:</span>
+                        <span id="displayNumber">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Operator:</span>
+                        <span id="displayOpFinal">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Plan:</span>
+                        <span>3 Months Unlimited</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Status:</span>
+                        <span style="color:green; display: flex; align-items: center; gap: 5px;"><i class="fas fa-check-circle"></i> Approved</span>
+                    </div>
+                </div>
+
+                <p style="font-size: 13px; color: #004085; background-color: #cce5ff; padding: 10px; border-radius: 5px;">
+                    You will be informed next week and recharge will be done automatically.
+                </p>
+            </div>
+            
+            <!-- Bottom Ad Unit -->
+            <div class="ad-banner">
+                <p>BOTTOM AD UNIT</p>
+            </div>
+
+            <button class="cta-btn" onclick="location.reload()" style="margin-top: 10px;">Home</button>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="disclaimer">
+            DISCLAIMER: This webpage is a conceptual demonstration for user interface design testing. Not affiliated with any telecom operator.
+        </footer>
+
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+        let selectedOperator = "";
+        let shareCount = 0;
+        const totalSharesRequired = 10; // Logic set to 10 clicks roughly
+
+        // Select SIM
+        function selectSim(element, operator) {
+            document.querySelectorAll('.sim-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedOperator = operator;
+        }
+
+        // Check Button
+        function checkEligibility() {
+            const mobileNumber = document.getElementById('mobileNumber').value;
+
+            if (selectedOperator === "") {
+                alert("Please select your SIM Operator first!");
+                return;
+            }
+            if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            // Loading Animation
+            const btn = document.querySelector('.cta-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking Eligibility...';
+            btn.style.opacity = "0.8";
+            
+            setTimeout(() => {
+                document.getElementById('step-1').classList.add('hidden');
+                document.getElementById('step-2').classList.remove('hidden');
+                document.getElementById('step-2').classList.add('fade-in-up');
+                
+                // Update text
+                document.getElementById('selectedOpText').innerText = selectedOperator;
+                window.scrollTo(0,0);
+            }, 2000);
+        }
+
+        // WhatsApp Share
+        function shareOnWhatsapp() {
+            // The viral text
+            const message = encodeURIComponent(`*Mega Recharge Mahotsav* 🎉\nGet 3 Months Free Recharge for ${selectedOperator}, Jio, Airtel, Vi & BSNL.\n\nCheck your eligibility now: \nhttps://your-website-link.com/`);
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+
+            // Progress Bar Logic
+            shareCount++;
+            
+            // Calculate Percentage (Slightly random to look real)
+            // Starts slow, gets faster
+            let progress = Math.min((shareCount / 5) * 100, 100); 
+            
+            // Update UI
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = progress + "%";
+            progressBar.innerHTML = Math.floor(progress) + "%";
+            progressText.innerHTML = Math.floor(progress) + "% Completed";
+
+            // Completion
+            if (progress >= 100) {
+                setTimeout(() => {
+                    document.getElementById('step-2').classList.add('hidden');
+                    document.getElementById('step-3').classList.remove('hidden');
+                    
+                    // Final Details
+                    document.getElementById('displayNumber').innerText = document.getElementById('mobileNumber').value;
+                    document.getElementById('displayOpFinal').innerText = selectedOperator;
+                    document.getElementById('step-3').classList.add('fade-in-up');
+                    window.scrollTo(0,0);
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
